@@ -1,0 +1,527 @@
+/* src/styles/ui.css */
+/* Global dark-dashboard UI — no libraries, just CSS variables + reusable classes */
+
+:root{
+  --bg: #0b0f17;
+  --panel: #101826;
+  --panel-2: #0e1623;
+  --muted: #7b8aa3;
+  --text: #e6edf7;
+  --text-2:#c7d2e4;
+
+  --border: rgba(255,255,255,.08);
+  --border-2: rgba(255,255,255,.12);
+
+  --primary: #4f8cff;
+  --primary-2:#3a77ff;
+  --danger: #ff4d6d;
+  --warning:#f7c948;
+  --success:#2dd4bf;
+
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --topbar-h: 72px;
+
+  --focus: 0 0 0 3px rgba(79,140,255,.25);
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+*{ box-sizing:border-box; }
+html, body, #root{ height:100%; }
+
+body{
+  margin:0;
+  font-family: var(--font);
+  background: radial-gradient(1200px 700px at 20% -10%, rgba(79,140,255,.20), transparent 60%),
+              radial-gradient(900px 600px at 90% 0%, rgba(45,212,191,.10), transparent 55%),
+              var(--bg);
+  color: var(--text);
+}
+
+a{ color: inherit; text-decoration:none; }
+h1,h2,h3{ margin:0; font-weight:650; letter-spacing:.2px; }
+p{ margin:0; color: var(--text-2); }
+
+::selection{ background: rgba(79,140,255,.35); }
+
+/* Layout */
+.appShell{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.appTopbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  background: rgba(11,15,23,.65);
+  border-bottom: 1px solid var(--border);
+}
+
+.appTopbarInner{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 220px;
+}
+.brandMark{
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(79,140,255,.95), rgba(45,212,191,.75));
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+}
+
+.brandMark{
+  width: 110px;        /* ancho para logo horizontal */
+  height: 60px;
+  border-radius: 12px;
+  background: transparent; /* fondo claro para logo rojo */
+  border: 0px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 4px 8px;    /* aire */
+}
+
+.brandLogo{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* que se lea */
+  display:block;
+  filter: saturate(1.05) contrast(1.05); /* leve para que “salte” */
+}
+
+
+
+
+.brandText{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.brandTitle{ font-size: 14px; color: var(--text); }
+.brandSub{ font-size: 12px; color: var(--muted); }
+
+.topbarActions{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; }
+
+.appMain{
+  width:100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+/* Page header */
+.pageHeader{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.pageTitle{
+  font-size: 18px;
+  color: var(--text);
+}
+.pageSubtitle{
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.pageHeaderRight{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+.pageHeaderLeft{ display:flex; align-items:center; gap:10px; }
+
+/* Cards */
+.card{
+  background: linear-gradient(180deg, rgba(16,24,38,.95), rgba(14,22,35,.95));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+.cardHeader{
+  padding: 14px 14px 0 14px;
+}
+.cardBody{
+  padding: 14px;
+}
+.cardTitleRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.cardTitle{
+  font-size: 14px;
+  color: var(--text);
+}
+.cardHint{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Grids */
+.grid{
+  display:grid;
+  gap: 12px;
+}
+.gridCols2{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.gridCols3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px){
+  .gridCols3{ grid-template-columns: 1fr; }
+  .gridCols2{ grid-template-columns: 1fr; }
+  .brand{ min-width: 0; }
+}
+
+/* Buttons */
+.btn{
+  appearance:none;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: .2px;
+  cursor:pointer;
+  transition: transform .08s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:hover{
+  border-color: var(--border-2);
+  background: rgba(255,255,255,.06);
+}
+.btn:active{ transform: translateY(1px); }
+.btn:focus{ outline: none; box-shadow: var(--focus); }
+.btn:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.btnPrimary{
+  border-color: rgba(79,140,255,.35);
+  background: linear-gradient(180deg, rgba(79,140,255,.22), rgba(79,140,255,.12));
+}
+.btnPrimary:hover{
+  border-color: rgba(79,140,255,.55);
+  background: linear-gradient(180deg, rgba(79,140,255,.28), rgba(79,140,255,.16));
+}
+
+.btnDanger{
+  border-color: rgba(255,77,109,.35);
+  background: linear-gradient(180deg, rgba(255,77,109,.18), rgba(255,77,109,.10));
+}
+.btnGhost{
+  background: transparent;
+}
+.btnLink{
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-2);
+  padding: 8px 10px;
+}
+.btnLink:hover{
+  background: rgba(255,255,255,.05);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* Badges */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+}
+.badgeSuccess{ border-color: rgba(45,212,191,.35); }
+.badgeWarning{ border-color: rgba(247,201,72,.35); }
+.badgeDanger{ border-color: rgba(255,77,109,.35); }
+
+/* Forms */
+.field{
+  display:flex;
+  flex-direction:column;
+  gap: 6px;
+}
+.label{
+  font-size: 12px;
+  color: var(--muted);
+}
+.input, .select{
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 13px;
+  outline:none;
+  transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.input::placeholder{ color: rgba(199,210,228,.55); }
+.input:focus, .select:focus{
+  border-color: rgba(79,140,255,.55);
+  box-shadow: var(--focus);
+  background: rgba(255,255,255,.04);
+}
+.inputRight{ text-align:right; }
+.inputSmall{ padding: 8px 10px; border-radius: 10px; font-size: 13px; }
+.formRow{
+  display:flex;
+  gap: 12px;
+  flex-wrap:wrap;
+}
+.formRow > *{ flex: 1; min-width: 180px; }
+.fieldInline{ display:flex; align-items:center; gap: 8px; }
+
+/* Table */
+.tableWrap{
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(0,0,0,.08);
+}
+.table{
+  width:100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.table thead th{
+  text-align:left;
+  padding: 12px 12px;
+  color: rgba(230,237,247,.9);
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+.table tbody td{
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: var(--text-2);
+}
+.table tbody tr:hover td{
+  background: rgba(255,255,255,.03);
+}
+.table td.right, .table th.right{ text-align:right; }
+.table td.center, .table th.center{ text-align:center; }
+.table tbody tr:last-child td{ border-bottom:none; }
+
+/* Alerts */
+.alert{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.alertDanger{ border-color: rgba(255,77,109,.35); }
+.alertSuccess{ border-color: rgba(45,212,191,.35); }
+.muted{ color: var(--muted); }
+.spacer8{ height: 8px; }
+.spacer12{ height: 12px; }
+
+.btnLeft{ justify-content:flex-start; width:100%; }
+.cellInput90{ width: 90px; }
+.pageHeaderLeft{ display:flex; align-items:center; gap:10px; }
+.mb12{ margin-bottom: 12px; }
+.colEditable{
+  background: rgba(79,140,255,.10) !important;
+}
+
+.twoCol{
+  display:grid;
+  grid-template-columns: 1fr 340px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 980px){
+  .twoCol{ grid-template-columns: 1fr; }
+}
+.scrollX{ overflow-x:auto; }
+
+.cellInput70{ width: 70px; }
+.hr{ border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+.sidePanel{
+  position: sticky;
+  top: calc(var(--topbar-h) + 16px);
+  align-self: start;
+}
+
+.rowLine{ display:flex; justify-content:space-between; margin: 8px 0; gap: 10px; }
+.rowLineLabel{ font-size: 13px; color: var(--muted); }
+.rowLineValue{ font-variant-numeric: tabular-nums; color: var(--text); font-weight: 700; }
+.panelTitle{ font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.totalRow{ display:flex; justify-content:space-between; font-size: 16px; color: var(--text); gap: 10px; }
+.note{ margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.35; }
+.noteStrong{ color: rgba(199,210,228,.8); }
+
+.btnSmall{ padding: 8px 10px; border-radius: 10px; font-size: 12px; }
+.ml8{ margin-left: 8px; }
+.mt16{ margin-top: 16px; }
+.max620{ max-width: 620px; }
+
+.modalOverlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  display:flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 28px 18px;
+  z-index: 50;
+}
+
+.modalCard{
+  width: min(980px, 100%);
+  max-height: calc(100vh - 56px);
+  overflow: hidden;
+}
+
+.modalHeader{
+  display:flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.formRow{
+  display:flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.field.grow{ flex: 1; }
+
+.w160{ width: 160px; }
+
+.scrollY{ overflow-y: auto; }
+.maxH420{ max-height: 420px; }
+.floatingConfigBtn{
+  position: fixed;
+  right: 22px;
+  bottom: 18px;
+  z-index: 30;
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+}
+
+.btnGhost{
+  display: none;
+}
+
+/* ===========================
+   FIX: Facturar sin scroll horizontal
+   =========================== */
+
+/* 1) clave para grids/flex: permitir encoger columnas */
+.twoCol > * {
+  min-width: 0;
+}
+
+/* 2) solo en Facturar: el wrap de tabla NO debe scrollear en X */
+.twoCol .tableWrap.scrollX {
+  overflow-x: hidden; /* antes era auto por .scrollX */
+}
+
+/* 3) que la tabla se ajuste al ancho disponible */
+.twoCol .table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* 4) evitar que el texto empuje el ancho */
+.twoCol .table th,
+.twoCol .table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 5) inputs dentro de celdas: que no se salgan */
+.twoCol .table td input {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   FACTURAR: usar todo el ancho (sin cortar texto)
+   =========================== */
+
+/* Saca SOLO Facturar del max-width de .appMain */
+.facturarFullBleed{
+  width: min(1300px, calc(100vw - 36px)); /* 👈 CAMBIA 1500px y ya */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Dos columnas responsive: la derecha se ajusta, la izquierda gana espacio */
+.facturarFullBleed .twoCol{
+  grid-template-columns: minmax(0, 1fr) clamp(290px, 24vw, 360px);
+}
+
+/* Evita overflow raro dentro del grid */
+.facturarFullBleed .twoCol > *{
+  min-width: 0;
+}
+
+/* Ya no queremos scroll horizontal; queremos que quepa */
+.facturarFullBleed .tableWrap.scrollX{
+  overflow-x: hidden;
+}
+
+/* La tabla puede ajustar mejor si dejamos que el header envuelva en 2 líneas */
+.facturarFullBleed .table thead th{
+  white-space: normal;
+  line-height: 1.15;
+}
+
+/* En el cuerpo mantenemos números compactos sin romper filas */
+.facturarFullBleed .table tbody td{
+  white-space: nowrap;
+}
+
+/* El nombre del producto sí puede envolver (para no perder info) */
+.facturarFullBleed .table tbody td:first-child{
+  white-space: normal;
+}
+
+/* Inputs de celdas: que no empujen el ancho */
+.facturarFullBleed .table td input{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}

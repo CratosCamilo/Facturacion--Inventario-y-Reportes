@@ -1,0 +1,158 @@
+/* src/components/ReportsView.css */
+
+.reportsFiltersGrid{
+  display: grid;
+  gap: 12px;
+}
+.reportsFiltersGrid3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.reportsFiltersGrid4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 980px){
+  .reportsFiltersGrid3,
+  .reportsFiltersGrid4{ grid-template-columns: 1fr; }
+}
+
+.reportsFiltersActions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.reportsTabsRow{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 12px 0;
+}
+
+.reportsTab{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.03);
+  color: var(--text-2);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor:pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.reportsTab:hover{
+  background: rgba(255,255,255,.06);
+  border-color: var(--border-2);
+  color: var(--text);
+}
+.reportsTabActive{
+  border-color: rgba(79,140,255,.55);
+  background: rgba(79,140,255,.14);
+  color: var(--text);
+}
+
+.reportsSectionHeader{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 14px 0 10px 0;
+}
+.reportsH2{
+  font-size: 14px;
+  color: var(--text);
+}
+.reportsHint{
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.reportsSummaryGrid{
+  display:grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 980px){
+  .reportsSummaryGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px){
+  .reportsSummaryGrid{ grid-template-columns: 1fr; }
+}
+
+.reportsBox{
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+}
+.reportsBoxLabel{
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.reportsBoxValue{
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.reportsEmptyRow{
+  padding: 14px 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ===== Select (tema oscuro) ===== */
+.select {
+  width: 100%;
+  height: 42px;
+  padding: 10px 40px 10px 12px;
+  border-radius: 12px;
+
+  background: rgba(10, 18, 35, 0.72);
+  border: 1px solid rgba(120, 170, 255, 0.22);
+
+  color: rgba(255, 255, 255, 0.92);
+  outline: none;
+
+  /* hace que el control nativo sepa que es “dark” */
+  color-scheme: dark;
+
+  /* si usas font global, puedes omitir */
+  font: inherit;
+}
+
+.select:focus {
+  border-color: rgba(120, 170, 255, 0.55);
+  box-shadow: 0 0 0 3px rgba(120, 170, 255, 0.18);
+}
+
+.select:hover {
+  border-color: rgba(120, 170, 255, 0.35);
+}
+
+/* flecha */
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.85) 50%),
+    linear-gradient(135deg, rgba(255,255,255,0.85) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 18px,
+    calc(100% - 12px) 18px;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* ===== Dropdown (options) =====
+   OJO: esto depende del SO, pero en Windows/Electron normalmente ayuda */
+.select option {
+  background: #0b1326;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Opcional: opción “Todos” un poquito más suave */
+.select option[value=""] {
+  color: rgba(255, 255, 255, 0.85);
+}

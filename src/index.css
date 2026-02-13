@@ -1,0 +1,11 @@
+/* src/index.css */
+/* Minimal reset. Main theme/styles are in src/styles/ui.css */
+
+:root{
+  color-scheme: dark;
+}
+
+html, body{
+  padding: 0;
+  margin: 0;
+}
